@@ -1,0 +1,13 @@
+# Rust
+core/target/
+
+# Swift / macOS
+apps/macos/.build/
+apps/macos/.swiftpm/
+*.xcodeproj/xcuserdata/
+.DS_Store
+
+# Local runtime state
+.local/
+*.log
+*.sock

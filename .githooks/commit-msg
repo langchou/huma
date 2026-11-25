@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+msg_file="$1"
+subject="$(head -n 1 "$msg_file")"
+
+if ! printf '%s\n' "$subject" | grep -Eq '^(feat|fix|docs|refactor|chore|test|perf)(\([a-z0-9_-]+\))?: .+'; then
+  echo "error: commit subject must use lowercase conventional format (e.g. 'feat(core): add humad daemon')" >&2
+  exit 1
+fi
+
+if grep -Eqi '^Co-authored-by:' "$msg_file"; then
+  echo "error: do not include Co-authored-by trailers in commits" >&2
+  exit 1
+fi
